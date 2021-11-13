@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Road+Rage&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap");
 
 .ItemWrapper {
   margin-top: 30px;
@@ -42,6 +43,13 @@
   text-decoration: none;
   color: black;
   transition: all 100ms;
+
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  width: fit-content;
+
+  font-family: "Dancing Script", cursive;
 }
 .ItemName:hover {
   text-decoration: underline;
@@ -63,6 +71,67 @@ button {
 
 .SpecialWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   place-items: center;
+  position: relative;
+  height: 200px;
+  margin-left: 15px;
+}
+
+.SpecialDownWrapper {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  place-items: center;
+}
+
+.ALERT {
+  color: red;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.Inputs {
+  display: grid;
+  grid-template-columns: 350px 350px;
+  align-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}
+
+.NeuerWunschHeaderWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.NeuerWunschHeader {
+  font-family: "Happy Monkey", cursive;
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.SubmitRequest {
+  width: 100px;
+}
+
+.InputWrapper {
+  display: flex;
+  justify-content: space-between;
+  place-items: center;
+  height: fit-content;
+  width: 300px;
+}
+
+.InputWrapper p {
+  font-size: 20px;
+  margin-right: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.NewItemInputText {
+  margin-left: 10px;
 }

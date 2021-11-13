@@ -1,25 +1,38 @@
-import React from 'react';
-import { Artikel, RequestData } from "./App";
+import React, {useState} from 'react';
+import { Artikel, Personen } from "./App";
 import Item from "./Item";
 import "./css/Liste.css";
 
 interface Props {
-    name: "finn" | "janni" | "martin" | "ines"; 
-    data: RequestData;
-    handleAddItem: (name: "finn" | "janni" | "martin" | "ines", ToAddObj: Artikel) => any;
-    handleDeleteItem: (name: "finn" | "janni" | "martin" | "ines", index: number) => any;
+    name: Personen; 
+    data: Artikel[];
+    handleAddItem: (name: Personen, ToAddObj: Artikel) => any;
+    handleDeleteItem: (name: Personen, index: number) => any;
+
+    haserr: boolean;
+    seterr: (data:boolean) => void;
 }
 
-const Liste:React.FC<Props> = (Props):JSX.Element => {
+const doNothing = () => {
+
+}
+
+const List:React.FC<Props> = (Props):JSX.Element => {
+
+    const [rick, setRick] = useState(true);
+
     return (
         <div className="Kasten">
             <h1 className="WunschlistenHeader">{Props.name[0].toUpperCase() + Props.name.substr(1) +"'s Wunschliste"}</h1>
-            {Props.data[Props.name].map((i, idx) => {
-                return <Item key={idx} ArtikelData={i} name={Props.name} fullData={Props.data} handleAddItem={Props.handleAddItem} handleDeleteItem={Props.handleDeleteItem} index={idx}></Item>
+            {(Props.data.length < 1 && rick) && (
+                <Item ArtikelData={{link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ", name:"Noch keine Wünsche hier! Trag welche ein!", bild:"https://i.ytimg.com/vi/Liugu2ZL3wI/maxresdefault.jpg"}} name={Props.name} add={doNothing} rem={() => {setRick(false)}} index={1000} haserr={false} seterr={doNothing}></Item>
+            )}
+            {Props.data && Props.data.map((i, idx) => {
+                return <Item key={idx} ArtikelData={i} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={idx} haserr={Props.haserr} seterr={Props.seterr}></Item>
             })}
-            <Item isAddItem={true} ArtikelData={{link:"", name:""}} name={Props.name} fullData={Props.data} handleAddItem={Props.handleAddItem} handleDeleteItem={Props.handleDeleteItem} index={1000}></Item>
+            <Item isAddItem={true} ArtikelData={{link:"", name:""}} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={1000} haserr={Props.haserr} seterr={Props.seterr}></Item>
         </div>
     );
 }
 
-export default Liste;
+export default List;

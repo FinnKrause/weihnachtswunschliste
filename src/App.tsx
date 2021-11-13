@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import Liste from "./List";
+import List from "./List";
 import "./css/App.css";
 import "./css/PersonButtons.css";
 
@@ -22,35 +22,43 @@ interface RequestData {
   "janni": Artikel[];
 }
 
+type Personen = "finn" | "janni" | "martin" | "ines";
+const emptyObj:RequestData = {finn: [], ines: [], martin: [], janni: []};
+
 const App:React.FC<Props> = (Props):JSX.Element => {
 
-  const StandardObject = {
-    finn: [{"name": "", "link": ""}], 
-    ines: [{"name": "", "link": ""}], 
-    martin: [{"name": "", "link": ""}],
-    janni: [{"name": "", "link": ""}]
-  }
-
-  const [DownSide, setDownside] = useState<JSX.Element>(<div></div>)
-  const [data, setdata] = useState<RequestData>(StandardObject)
+  const [name, setname] = useState<"finn" | "janni" | "martin" | "ines">("ines");
+  const [data, setdata] = useState<RequestData>(emptyObj)
+  const [haserror, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/getData").then((response: any) => {
-      setdata(response.data)
-      console.log(response.data)
+    axios.get("https://api.mykrause.org/getData").then((response: any) => {
+      if (JSON.stringify(response.data) !== "{}") setdata(response.data)
     }).catch(err => console.log(err))
   }, [])
 
-  const handleAddItem = (name: "finn" | "janni" | "martin" | "ines", newItem: Artikel) => {
-    const tempData = {...data};
-    tempData[name].push(newItem);
-    setdata(tempData);
+  const sendDataToServer = (person: Personen) => {
+     axios.post("https://api.mykrause.org/setData/"+person, data[person]).then(response => {
+      console.log(response.data)
+    })
   }
 
-  const handleDeleteItem = (name: "finn" | "janni" | "martin" | "ines", index: number) => {
+  const handleAddItem = (name: Personen, newItem: Artikel) => {
     const tempData = {...data};
-    tempData[name].splice(index);
-    setdata(tempData);
+    
+    tempData[name] === undefined && (tempData[name] = []);
+    tempData[name].push(newItem);
+
+    sendDataToServer(name);
+    setdata(tempData)
+  }
+
+  const handleDeleteItem = (name: Personen, index: number) => {
+    const tempData = {...data}
+    tempData[name].splice(index, 1);
+    sendDataToServer(name);
+    setdata(tempData)
+
   }
 
   return (
@@ -59,27 +67,25 @@ const App:React.FC<Props> = (Props):JSX.Element => {
       
       <div className="selectPersonView">
         
-        <div className="PSBWrapper" onClick={() => {
-          setDownside(<Liste name="ines" data={data} handleAddItem={handleAddItem} handleDeleteItem={handleDeleteItem}></Liste>)
-          }}>
+        <div className="PSBWrapper" onClick={() => setname("ines")}>
           <div id="red" className="ColoredSide"></div>
           <h3 className="PSB Ines">Ines</h3>
           <div className="Flex100"></div>
         </div>
         
-        <div className="PSBWrapper" onClick={() => {setDownside(<Liste name="martin" data={data} handleAddItem={handleAddItem} handleDeleteItem={handleDeleteItem}></Liste>)}}>
+        <div className="PSBWrapper" onClick={() => setname("martin")}>
           <div id="green" className="ColoredSide"></div>
           <h3 className="PSB Martin">Martin</h3>
           <div className="Flex100"></div>
         </div>
         
-        <div className="PSBWrapper" onClick={() => {setDownside(<Liste name="janni" data={data} handleAddItem={handleAddItem} handleDeleteItem={handleDeleteItem}></Liste>)}}>
+        <div className="PSBWrapper" onClick={() => setname("janni")}>
           <div id="purple" className="ColoredSide"></div>
           <h3 className="PSB Janni">Janni</h3>
           <div className="Flex100"></div>
         </div>
         
-        <div className="PSBWrapper" onClick={() => {setDownside(<Liste name="finn" data={data} handleAddItem={handleAddItem} handleDeleteItem={handleDeleteItem}></Liste>)}}>
+        <div className="PSBWrapper" onClick={() => setname("finn")}>
           <div id="blue" className="ColoredSide"></div>
           <h3 className="PSB Finn">Finn</h3>
           <div className="Flex100"></div>
@@ -88,7 +94,7 @@ const App:React.FC<Props> = (Props):JSX.Element => {
       </div>
       
       <div className="Downside">
-        {DownSide}
+        <List name={name} data={data[name]} handleAddItem={handleAddItem} handleDeleteItem={handleDeleteItem} haserr={haserror} seterr={setError}></List>
       </div>
     
     </div>
@@ -96,4 +102,4 @@ const App:React.FC<Props> = (Props):JSX.Element => {
 }
 
 export default App;
-export type {Artikel, RequestData};
+export type {Artikel, RequestData, Personen};
