@@ -1,0 +1,37 @@
+.ItemWrapper {
+  margin-top: 30px;
+  display: flex;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 10px 10px rgba(200, 200, 200, 0.5);
+  border: 1px dashed black;
+}
+.VorschauBildWrapper {
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.Vorschaubild {
+  max-height: 150px;
+  aspect-ratio: unset;
+  margin-left: 10px;
+}
+
+.ItemDatenWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.ItemName {
+  font-size: 25px;
+  text-decoration: none;
+  color: black;
+  transition: all 100ms;
+}
+.ItemName:hover {
+  text-decoration: underline;
+  color: blue;
+}
