@@ -64,7 +64,7 @@ const Item:React.FC<Props> = (Props):JSX.Element => {
                 {Props.ArtikelData.bild && <img src={Props.ArtikelData.bild} alt={Props.ArtikelData.bild.toString()} className="Vorschaubild"/>}
             </div>
             <div className="ItemDatenWrapper">
-                <button className="ItemName" onClick={() => window.open(Props.ArtikelData.link)}>{Props.ArtikelData.name}</button>
+                <button className={`ItemName ${(Props.ArtikelData.link) ? "hasLink" : ""}`} onClick={() => {if (Props.ArtikelData.link) window.open(Props.ArtikelData.link)}}>{Props.ArtikelData.name}</button>
                 {Props.ArtikelData.rating && <p>Rating: {Props.ArtikelData.rating}</p>}
             </div>
             <svg className="DeleteButton" onClick={() => {
