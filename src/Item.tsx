@@ -45,7 +45,7 @@ const Item:React.FC<Props> = (Props):JSX.Element => {
                     <button className="SubmitRequest" onClick={() => {
                         const name = document.getElementById("Name")! as HTMLInputElement;
                         const BildLink = document.getElementById("BildLink")! as HTMLInputElement;
-                        const link = document.getElementById("BildLink")! as HTMLInputElement;
+                        const link = document.getElementById("Link")! as HTMLInputElement;
                         const Rating = document.getElementById("Rating")! as HTMLInputElement;
                                     
                         if (name.value){ 
