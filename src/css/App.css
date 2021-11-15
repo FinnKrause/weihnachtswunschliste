@@ -5,6 +5,10 @@ body {
   background-size: cover;
 }
 
+#root {
+  height: 100%;
+}
+
 .Wrapper {
   display: flex;
   place-items: center;
@@ -82,4 +86,26 @@ body {
 
 #blue {
   background-color: aqua;
+}
+
+.PlsVerify {
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#login {
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  height: 100%;
+}
+
+.PlsVerify {
+}
+
+@media all and (max-width: 450px) {
+  #login {
+    flex-direction: column;
+  }
 }

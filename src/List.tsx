@@ -11,6 +11,9 @@ interface Props {
 
     haserr: boolean;
     seterr: (data:boolean) => void;
+
+    isLoggenIn: boolean;
+    setLogin: (data: boolean) => void;
 }
 
 const doNothing = () => {
@@ -21,7 +24,7 @@ const List:React.FC<Props> = (Props):JSX.Element => {
 
     const [rick, setRick] = useState(true);
 
-    return (
+    if (Props.isLoggenIn) return (
         <div className="Kasten">
             <h1 className="WunschlistenHeader">{Props.name[0].toUpperCase() + Props.name.substr(1) +"'s Wunschliste"}</h1>
             {(Props.data.length < 1 && rick) && (
@@ -31,6 +34,12 @@ const List:React.FC<Props> = (Props):JSX.Element => {
                 return <Item key={idx} ArtikelData={i} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={idx} haserr={Props.haserr} seterr={Props.seterr}></Item>
             })}
             <Item isAddItem={true} ArtikelData={{link:"", name:""}} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={1000} haserr={Props.haserr} seterr={Props.seterr}></Item>
+        </div>
+    );
+    else return (
+        <div className="Kasten">
+            <h1 className="WunschlistenHeader">Bitte bestätige dich mit dem Passwort!</h1>
+            <input type="password" onChange={(e:React.ChangeEvent<HTMLInputElement>) => {if (e.target.value.toLowerCase() === "krause") {Props.setLogin(true); localStorage.setItem("login", "true")}}}></input>
         </div>
     );
 }

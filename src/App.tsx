@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import List from "./List";
 import "./css/App.css";
-import "./css/PersonButtons.css";
+import "./css/Scrollbar.css";
 
 interface Props {
 
@@ -28,6 +28,7 @@ const emptyObj:RequestData = {finn: [], ines: [], martin: [], janni: []};
 const App:React.FC<Props> = (Props):JSX.Element => {
 
   const [name, setname] = useState<"finn" | "janni" | "martin" | "ines">("ines");
+  const [isLogin, setLogin] = useState<boolean>((localStorage.getItem("login") === "true") ? true : false);
   const [data, setdata] = useState<RequestData>(emptyObj)
   const [haserror, setError] = useState<boolean>(false);
 
@@ -61,8 +62,10 @@ const App:React.FC<Props> = (Props):JSX.Element => {
 
   }
 
+  
+
   return (
-    <div className="Wrapper">
+    <div className={`Wrapper`}>
       <h1 className="Überschrift">Weihnachten bei Fam. Krause</h1>
       
       <div className="selectPersonView">
@@ -93,8 +96,16 @@ const App:React.FC<Props> = (Props):JSX.Element => {
       
       </div>
       
-      <div className="Downside">
-        <List name={name} data={data[name]} handleAddItem={handleAddItem} handleDeleteItem={handleDeleteItem} haserr={haserror} seterr={setError}></List>
+      <div className={`Downside${(!isLogin) ? " DownLogin" : ""}`}> 
+        <List 
+          name={name} 
+          data={data[name]} 
+          handleAddItem={handleAddItem} 
+          handleDeleteItem={handleDeleteItem} 
+          haserr={haserror} seterr={setError} 
+          isLoggenIn={isLogin} 
+          setLogin={setLogin}>
+        </List>
       </div>
     
     </div>
