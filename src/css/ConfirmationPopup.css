@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+
+.ConfirmWrapper {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  flex-direction: column;
+}
+
+.ConfirmWrapper h1 {
+  color: white;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.ConfirmButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  place-items: center;
+}
+
+.ConfirmButtons button {
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  color: white;
+  font-size: large;
+  font-family: 'Oswald', sans-serif;
+  opacity: 1;
+}
+
+.hidden {
+  /* visibility: hidden; */
+  pointer-events: none;
+  opacity: 0.1;
+}
+  
+.ConfirmButtons button{
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+}
+
+.ConfirmButtons button span{
+  position: relative;
+  z-index: 2;
+}
+
+.ConfirmButtons button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #ff003b;
+  transition: all .35s;
+}
+
+.ConfirmButtons button:hover {
+  color: #fff;
+}
+
+.ConfirmButtons button:hover:after{
+  width: 100%;
+}

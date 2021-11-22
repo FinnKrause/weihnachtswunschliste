@@ -4,14 +4,17 @@
 .ItemWrapper {
   margin-top: 30px;
   display: flex;
-  border: 1px solid white;
   border-radius: 10px;
-  box-shadow: 10px 10px rgba(200, 200, 200, 0.5);
+  box-shadow: 10px 10px rgb(128, 128, 128);
   min-height: 100px;
   height: fit-content;
 
   font-family: "Road Rage", cursive;
   position: relative;
+
+  opacity: 0;
+  visibility: hidden;
+  animation: fade-in 1000ms ease forwards;
 }
 
 .VorschauBildWrapper {
@@ -39,10 +42,16 @@
   margin-left: 20px;
 }
 
+.ItemDatenWrapper p {
+  color: white;
+  opacity: 0.9;
+}
+
 .ItemName {
   font-size: 25px;
   text-decoration: none;
-  color: black;
+  color: white;
+  opacity: 0.9;
   transition: all 100ms;
   height: fit-content;
 
@@ -116,9 +125,44 @@ button {
   padding: 0;
 }
 
+
+
+
+
 .SubmitRequest {
   width: 100px;
+  background-color: inherit;
+  color: white;
+  border: 1px solid white;
+  border-radius: 3px;
+  position: relative;
 }
+
+.SubmitRequest span{
+  position: relative;
+  z-index: 2;
+}
+
+.SubmitRequest:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #00ffea;
+  transition: all .35s;
+}
+
+.SubmitRequest:hover {
+  color: #fff;
+}
+
+.SubmitRequest:hover:after{
+  width: 100%;
+}
+
+
 
 .InputWrapper {
   display: flex;
@@ -137,6 +181,39 @@ button {
 
 .NewItemInputText {
   margin-left: 10px;
+  background-color: inherit;
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+}
+
+.NewItemInputText::placeholder {
+  color: white;
+  opacity: 0.4;
+  text-align: center;
+}
+
+.NewItemInputText:focus {
+  background-color: inherit;
+}
+
+.noSHADOW {
+  box-shadow: none;
+  color: white;
+}
+
+.Starholder {
+  margin-top: 10px;
+}
+
+.star {
+  transition: all 200ms;
+}
+
+.star:hover {
+  stroke: green;
+  fill: green;
+  transform: scale(1.3);
 }
 
 @media all and (max-width: 900px) {

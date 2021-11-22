@@ -33,13 +33,13 @@ const App:React.FC<Props> = (Props):JSX.Element => {
   const [haserror, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    axios.get("https://api.mykrause.org/getData").then((response: any) => {
+    axios.get("http://localhost:2445/getData/").then((response: any) => { //https://api.mykrause.org/getData/
       if (JSON.stringify(response.data) !== "{}") setdata(response.data)
     }).catch(err => console.log(err))
   }, [])
 
   const sendDataToServer = (person: Personen) => {
-     axios.post("https://api.mykrause.org/setData/"+person, data[person]).then(response => {
+     axios.post("http://localhost:2445/setData/"+person, data[person]).then(response => { //https://api.mykrause.org/setData/
       console.log(response.data)
     })
   }
@@ -59,10 +59,7 @@ const App:React.FC<Props> = (Props):JSX.Element => {
     tempData[name].splice(index, 1);
     sendDataToServer(name);
     setdata(tempData)
-
   }
-
-  
 
   return (
     <div className={`Wrapper`}>
@@ -106,8 +103,7 @@ const App:React.FC<Props> = (Props):JSX.Element => {
           isLoggenIn={isLogin} 
           setLogin={setLogin}>
         </List>
-      </div>
-    
+      </div>    
     </div>
   );
 }

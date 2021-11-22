@@ -10,7 +10,8 @@
 
 .Kasten {
   margin-top: 100px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #141414;
   border-radius: 30px;
   height: fit-content;
   width: 90%;
@@ -20,9 +21,22 @@
 
   display: flex;
   flex-direction: column;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: all 500ms;
+  animation: fade-in 1000ms forwards ease;
 }
 
 .WunschlistenHeader {
+  color: white;
   font-size: 30px;
   font-family: "Dancing Script", cursive;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
 }

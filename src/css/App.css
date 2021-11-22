@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto+Condensed:wght@700&display=swap");
 
+
 body {
-  background-image: url("../images/background.jpg");
+  background-image: url("../images/1762890.jpg");
   background-size: cover;
 }
 
@@ -19,7 +20,7 @@ body {
   color: white;
   font-family: "Mountains of Christmas", cursive;
   font-size: 50px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .selectPersonView {
@@ -99,9 +100,6 @@ body {
   justify-content: center;
   place-items: center;
   height: 100%;
-}
-
-.PlsVerify {
 }
 
 @media all and (max-width: 450px) {
