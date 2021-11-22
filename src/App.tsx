@@ -33,13 +33,13 @@ const App:React.FC<Props> = (Props):JSX.Element => {
   const [haserror, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    axios.get("http://localhost:2445/getData/").then((response: any) => { //https://api.mykrause.org/getData/
+    axios.get("https://api.mykrause.org/getData/").then((response: any) => { //https://api.mykrause.org/getData/
       if (JSON.stringify(response.data) !== "{}") setdata(response.data)
     }).catch(err => console.log(err))
   }, [])
 
   const sendDataToServer = (person: Personen) => {
-     axios.post("http://localhost:2445/setData/"+person, data[person]).then(response => { //https://api.mykrause.org/setData/
+     axios.post("https://api.mykrause.org/setData/"+person, data[person]).then(response => { //https://api.mykrause.org/setData/
       console.log(response.data)
     })
   }
