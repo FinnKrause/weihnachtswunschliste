@@ -14,10 +14,23 @@ interface Props {
 
     isLoggenIn: boolean;
     setLogin: (data: boolean) => void;
+
+    isDemo: boolean;
 }
 
 const doNothing = () => {
 
+}
+
+const getName = (name:string):string => {
+    let returnvalue = "";
+    switch(name) {
+        case "finn": returnvalue = "Person4"; break;
+        case "ines": returnvalue = "Person1"; break;
+        case "janni": returnvalue = "Person3"; break;
+        case "martin": returnvalue = "Person2"; break;
+    }
+    return returnvalue;
 }
 
 const List:React.FC<Props> = (Props):JSX.Element => {
@@ -26,14 +39,16 @@ const List:React.FC<Props> = (Props):JSX.Element => {
 
     if (Props.isLoggenIn) return (
         <div className="Kasten">
-            <h1 className="WunschlistenHeader">{Props.name[0].toUpperCase() + Props.name.substr(1) +"'s Wunschliste"}</h1>
-            {(Props.data.length < 1 && rick) && (
-                <Item ArtikelData={{link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ", name:"Noch keine Wünsche hier! Trag welche ein!", bild:"https://i.ytimg.com/vi/Liugu2ZL3wI/maxresdefault.jpg"}} name={Props.name} add={doNothing} rem={() => {setRick(false)}} index={1000} haserr={false} seterr={doNothing}></Item>
+            <h1 className="WunschlistenHeader">{Props.isDemo ? getName(Props.name)+"'s Wunschliste" : (Props.name[0].toUpperCase() + Props.name.substr(1) +"'s Wunschliste")}</h1>
+            {((!Props.data || Props.data.length < 1) && rick) && (
+                <Item key="rick" ArtikelData={{link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ", rating: "100", name:"Noch keine Wünsche hier! Trag welche ein!", bild:"https://i.ytimg.com/vi/Liugu2ZL3wI/maxresdefault.jpg"}} name={Props.name} add={doNothing} rem={() => {setRick(false)}} index={1000} haserr={false} seterr={doNothing}></Item>
             )}
-            {Props.data && Props.data.map((i, idx) => {
+            {Props.data && Props.data.sort((a: Artikel, b:Artikel) => {
+                return ((+a.rating > +b.rating) ? -1 : (+a.rating === +b.rating) ? 0 : 1)
+            }).map((i, idx) => {
                 return <Item key={idx} ArtikelData={i} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={idx} haserr={Props.haserr} seterr={Props.seterr}></Item>
             })}
-            <Item isAddItem={true} ArtikelData={{link:"", name:""}} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={1000} haserr={Props.haserr} seterr={Props.seterr}></Item>
+            <Item key={"add"} isAddItem={true} ArtikelData={{link:"", name:"", rating:""}} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={1000} haserr={Props.haserr} seterr={Props.seterr}></Item>
         </div>
     );
     else return (

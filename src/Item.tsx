@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import {Artikel} from "./App";
+import {Artikel, Personen} from "./App";
 import ConfirmationPopup from "./ConfirmationPopup";
 import "./css/Item.css";
 
 interface Props {
-    name: "finn" | "janni" | "martin" | "ines"; 
+    name: Personen; 
     isAddItem?: boolean;
     ArtikelData: Artikel;
     index: number,
 
-    add: (name: "finn" | "janni" | "martin" | "ines", ToAddObj: Artikel) => any;
-    rem: (name: "finn" | "janni" | "martin" | "ines", index: number) => any;
+    add: (name: Personen, ToAddObj: Artikel) => any;
+    rem: (name: Personen, index: number) => any;
 
     haserr: boolean;
     seterr: (data: boolean) => void;
