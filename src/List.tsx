@@ -40,12 +40,11 @@ const List:React.FC<Props> = (Props):JSX.Element => {
     if (Props.isLoggenIn) return (
         <div className="Kasten">
             <h1 className="WunschlistenHeader">{Props.isDemo ? getName(Props.name)+"'s Wunschliste" : (Props.name[0].toUpperCase() + Props.name.substr(1) +"'s Wunschliste")}</h1>
-            {((!Props.data || Props.data.length < 1) && rick) && (
-                <Item key="rick" ArtikelData={{link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ", rating: "100", name:"Noch keine Wünsche hier! Trag welche ein!", bild:"https://i.ytimg.com/vi/Liugu2ZL3wI/maxresdefault.jpg"}} name={Props.name} add={doNothing} rem={() => {setRick(false)}} index={1000} haserr={false} seterr={doNothing}></Item>
+            {((!Props.data || !Props.data.sort || Props.data.length < 1) && rick) && (
+                <Item key="rick" ArtikelData={{link:"https://www.youtube.com/watch?v=OwIG7OGTPfs&ab_channel=Kurtis", rating: "100", name:"Noch keine Wünsche hier! Trag welche ein!", bild:"https://i.ytimg.com/vi/Liugu2ZL3wI/maxresdefault.jpg"}} name={Props.name} add={doNothing} rem={() => {setRick(false)}} index={1000} haserr={false} seterr={doNothing}></Item>
             )}
-            {Props.data && Props.data.sort((a: Artikel, b:Artikel) => {
-                return ((+a.rating > +b.rating) ? -1 : (+a.rating === +b.rating) ? 0 : 1)
-            }).map((i, idx) => {
+            {Props.data && Props.data.sort((a: Artikel, b:Artikel) => ((+a.rating > +b.rating) ? -1 : (+a.rating === +b.rating) ? 0 : 1))
+            .map((i, idx) => {
                 return <Item key={idx} ArtikelData={i} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={idx} haserr={Props.haserr} seterr={Props.seterr}></Item>
             })}
             <Item key={"add"} isAddItem={true} ArtikelData={{link:"", name:"", rating:""}} name={Props.name} add={Props.handleAddItem} rem={Props.handleDeleteItem} index={1000} haserr={Props.haserr} seterr={Props.seterr}></Item>

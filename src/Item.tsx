@@ -42,11 +42,13 @@ const Item:React.FC<Props> = (Props):JSX.Element => {
                 </div>
                 {Props.haserr && <p className="ALERT">!Bitte gib dem neuen Eintrag einen Namen!</p>}
                 <div className="SpecialDownWrapper">
-                    <div className="Inputs">
-                        <div className="InputWrapper">
-                            <p>Wunsch: </p>
-                            <input id="Name" type="text" className="NewItemInputText" placeholder="Artikel-Name/Wunsch"/>
-                        </div>
+
+                    <div className="InputWrapper">
+                        <p>Wunsch: </p>
+                        <input id="Name" type="text" className="NewItemInputText" placeholder="Artikel-Name/Wunsch"/>
+                    </div>
+
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
                         <div className="InputWrapper">
                             <p>Link zum Artikel: </p>
                             <input id="Link" type="text" className="NewItemInputText" placeholder="Link zum Artikel"/>
@@ -55,11 +57,13 @@ const Item:React.FC<Props> = (Props):JSX.Element => {
                             <p>Vorschaubild-Link: </p>
                             <input id="BildLink" type="text" className="NewItemInputText" placeholder=" (optional)"/>
                         </div>
-                        <div className="InputWrapper">
-                            <p>Wie wichtig? </p>
-                            <input id="Rating" type="range"/>
-                        </div>
                     </div>
+
+                    <div className="InputWrapper">
+                        <p>Wie wichtig? </p>
+                        <input id="Rating" type="range"/>
+                    </div>
+
                     <button className="SubmitRequest" onClick={() => {
                         const name = document.getElementById("Name")! as HTMLInputElement;
                         const BildLink = document.getElementById("BildLink")! as HTMLInputElement;
@@ -80,7 +84,7 @@ const Item:React.FC<Props> = (Props):JSX.Element => {
         <div className="ItemWrapper">
             {confirm && <ConfirmationPopup Frage="Willst du diesen Wunsch wirklich löschen?" onDecline={() => setConfirm(false)} onOk={() => {Props.rem(Props.name, Props.index); setConfirm(false)}}></ConfirmationPopup>}
             <div className={`VorschauBildWrapper${(confirm) ? " hidden" : ""}`}>
-                {Props.ArtikelData.bild && <img src={Props.ArtikelData.bild} alt={Props.ArtikelData.bild.toString()} className="Vorschaubild"/>}
+                {Props.ArtikelData.bild && <div className="Vorschaubild" style={{backgroundImage: "url(\""+Props.ArtikelData.bild+"\")"}}/>}
             </div>
             <div className={`ItemDatenWrapper${(confirm) ? " hidden" : ""}`}>
                 <button className={`ItemName ${(Props.ArtikelData.link) ? "hasLink" : ""}`} onClick={() => {if (Props.ArtikelData.link) window.open(Props.ArtikelData.link)}}>{Props.ArtikelData.name}</button>

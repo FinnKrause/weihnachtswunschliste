@@ -31,13 +31,13 @@ const App:React.FC = ():JSX.Element => {
   const [haserror, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    axios.get(`https://api.mykrause.org/${isDemo ? "demo/" : ""}getData/`).then((response: any) => { //https://api.mykrause.org/getData/
+    axios.get(`https://apiweihnachten.mykrause.org/${isDemo ? "demo/" : ""}getData/`).then((response: any) => { //https://api.mykrause.org/getData/
       if (JSON.stringify(response.data) !== "{}") setdata(response.data)
     }).catch(err => console.log(err))
   }, [])
 
   const sendDataToServer = (person: Personen) => {
-     axios.post(`https://api.mykrause.org/${isDemo ? "demo/" : ""}setData/`+person, data[person]).then(response => { //https://api.mykrause.org/setData/
+     axios.post(`https://apiweihnachten.mykrause.org/${isDemo ? "demo/" : ""}setData/`+person, data[person]).then(response => { //https://api.mykrause.org/setData/
       console.log(response.data)
     })
   }

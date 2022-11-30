@@ -1,36 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Road+Rage&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
-.ItemWrapper {
-  margin-top: 30px;
-  display: flex;
-  border-radius: 10px;
-  box-shadow: 10px 10px rgb(128, 128, 128);
-  min-height: 100px;
-  height: fit-content;
-
-  font-family: "Road Rage", cursive;
+.ItemWrapper {  
   position: relative;
-
-  opacity: 0;
+  display: flex;
+  height: fit-content;
   visibility: hidden;
+  border-radius: 10px;
+  margin-top: 30px;
+  min-height: 100px;
+  opacity: 0;
+  
+  backdrop-filter: blur(30px);
+  background-color: hsla(0,0%,100%,.2);
+  
+  font-family: 'Roboto', sans-serif;
   animation: fade-in 1000ms ease forwards;
-}
 
-.VorschauBildWrapper {
-  display: flex;
-  justify-content: center;
-  position: relative;
+  padding: 10px;
 
-  height: fit-content;
-  width: fit-content;
-  max-height: 150px;
-  margin-left: 10px;
 }
 
 .Vorschaubild {
-  max-width: 250px;
-  border-radius: 20px 0px 0px 0px;
+  width: 250px;
+  height: 140px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
 }
 
 .ItemDatenWrapper {
@@ -40,6 +37,7 @@
   flex-direction: column;
   position: relative;
   margin-left: 20px;
+  
 }
 
 .ItemDatenWrapper p {
@@ -55,17 +53,20 @@
   transition: all 100ms;
   height: fit-content;
 
+  backdrop-filter: brightness(0);
+  border-radius: 5px;
+  padding: 5px;
+
   background-color: transparent;
-  padding: 0;
   border: none;
   width: fit-content;
 
-  font-family: "Dancing Script", cursive;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 .hasLink:hover {
   text-decoration: underline;
-  color: blue;
 }
 
 .DeleteButton {
@@ -87,50 +88,47 @@ button {
   justify-content: center;
   place-items: center;
   position: relative;
-  height: 200px;
-  margin-left: 15px;
 }
 
 .SpecialDownWrapper {
-  display: flex;
-  height: 100%;
+  /* display: flex;
   justify-content: center;
-  place-items: center;
+  place-items: center; */
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .ALERT {
   color: red;
+  backdrop-filter: brightness(0);
+  border-radius: 5px;
+  padding: 5px;
   margin: 0;
-  padding: 0;
-  font-size: 20px;
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  align-self: flex-start;
 }
 
-.Inputs {
-  display: grid;
-  grid-template-columns: 350px 350px;
-  align-content: space-evenly;
-  height: 100%;
-  width: 100%;
-}
 
 .NeuerWunschHeaderWrapper {
-  display: flex;
   width: 100%;
 }
 
 .NeuerWunschHeader {
-  font-family: "Happy Monkey", cursive;
-  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+
   margin: 0;
-  padding: 0;
+  backdrop-filter: brightness(0);
+  border-radius: 5px;
+  padding: 10px;
 }
-
-
-
-
 
 .SubmitRequest {
   width: 100px;
+  margin-top: 10px;
   background-color: inherit;
   color: white;
   border: 1px solid white;
@@ -166,35 +164,47 @@ button {
 
 .InputWrapper {
   display: flex;
-  justify-content: space-between;
-  place-items: center;
+  flex-direction: column;
+
   height: fit-content;
-  width: 300px;
+  width: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .InputWrapper p {
-  font-size: 20px;
-  margin-right: 10px;
+
+
+  font-size: 15px;
   margin: 0;
+  margin-top: 10px;
   padding: 0;
 }
 
 .NewItemInputText {
-  margin-left: 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+
+  font-family: inherit;
+  font-size: 13px;
+
   background-color: inherit;
   border: 1px solid white;
-  border-radius: 4px;
+  
   color: white;
 }
 
 .NewItemInputText::placeholder {
   color: white;
   opacity: 0.4;
-  text-align: center;
+  left: 10px;
+  padding-left: 10px;
+  
 }
 
-.NewItemInputText:focus {
+.NewItemInputText:focus-visible {
   background-color: inherit;
+  border-color: none;
 }
 
 .noSHADOW {
@@ -303,10 +313,6 @@ button {
 }
 
 @media all and (max-width: 400px) {
-  .Inputs {
-    grid-template-columns: 100%;
-  }
-
   .SpecialDownWrapper {
     width: 100%;
     justify-content: center;
